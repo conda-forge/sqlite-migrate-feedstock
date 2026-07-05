@@ -1,18 +1,18 @@
 {% set name = "sqlite-migrate" %}
-{% set version = "0.1b0" %}
+{% set version = "0.1b1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/sqlite-migrate-{{ version }}.tar.gz
-  sha256: 8d502b3ca4b9c45e56012bd35c03d23235f0823c976d4ce940cbb40e33087ded
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 7b346f1cefd21af862f415f0fc81228424fa91933ac555676d8115fc9e86a7c0
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -21,7 +21,7 @@ requirements:
     - setuptools
   run:
     - python >={{ python_min }}
-    - sqlite-utils
+    - sqlite-utils <4
 
 test:
   imports:
